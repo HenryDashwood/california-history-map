@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #f9e9cb;
+  --text-dark: #171717;
+  --accent-gold: #faad19;
+  --border-color: #d4af37;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-cream);
+  color: var(--text-dark);
+}
+
+.leaflet-container {
+  height: 100vh;
+  width: 100%;
+}
+
+/* Custom icon styling */
+.custom-map-icon svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease;
+}
+
+.custom-map-icon:hover svg {
+  transform: scale(1.2);
+}
+
+/* Style Leaflet popups to match aesthetic */
+.leaflet-popup-content-wrapper {
+  background: var(--bg-cream);
+  border: 2px solid var(--accent-gold);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-popup-tip {
+  background: var(--bg-cream);
+  border: 2px solid var(--accent-gold);
+  border-bottom: none;
+  border-right: none;
+}
+
+/* Animation for sea routes */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.sea-route-animation {
+  animation: dash 2s linear infinite;
+}
