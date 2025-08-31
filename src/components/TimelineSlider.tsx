@@ -73,19 +73,18 @@ const TimelineSlider: React.FC<TimelineSliderProps> = ({
 
   const percentage = ((currentYear - minYear) / (maxYear - minYear)) * 100;
 
-  // Generate tick marks for major years
+  // Generate tick marks every 10 years
   const majorTicks = [];
-  const tickInterval = Math.ceil((maxYear - minYear) / 8); // Approximately 8-10 ticks
-  for (let year = minYear; year <= maxYear; year += tickInterval) {
+  for (let year = 1540; year <= maxYear; year += 10) {
     majorTicks.push(year);
   }
 
   return (
-    <div className="p-4 rounded-lg shadow-lg border-2" 
+    <div className="p-3 md:p-4 rounded-lg shadow-lg border-2" 
          style={{ backgroundColor: '#f9e9cb', borderColor: '#faad19' }}>
-      <div className="flex items-center gap-4 mb-4">
-        <h3 className="text-lg font-bold" style={{ color: '#171717', fontFamily: 'Georgia, serif' }}>Timeline</h3>
-        <div className="text-2xl font-bold min-w-[60px]" style={{ color: '#171717', fontFamily: 'Georgia, serif' }}>
+      <div className="flex items-center gap-2 md:gap-4 mb-3 md:mb-4">
+        <h3 className="text-base md:text-lg font-bold" style={{ color: '#171717', fontFamily: 'Georgia, serif' }}>Timeline</h3>
+        <div className="text-xl md:text-2xl font-bold min-w-[50px] md:min-w-[60px]" style={{ color: '#171717', fontFamily: 'Georgia, serif' }}>
           {currentYear}
         </div>
         {onPlayToggle && (
@@ -132,38 +131,25 @@ const TimelineSlider: React.FC<TimelineSliderProps> = ({
             }}
           />
 
-          {/* Major tick marks */}
+        </div>
+        
+        {/* Tick marks below the timeline */}
+        <div className="relative mt-2 pb-4">
           {majorTicks.map(year => {
             const tickPercentage = ((year - minYear) / (maxYear - minYear)) * 100;
             return (
               <div
                 key={year}
-                className="absolute top-full mt-1 transform -translate-x-1/2"
+                className="absolute transform -translate-x-1/2"
                 style={{ left: `${tickPercentage}%` }}
               >
-                <div className="w-0.5 h-2 bg-gray-400 mx-auto mb-1" />
-                <div className="text-xs text-gray-600 font-medium whitespace-nowrap">
+                <div className="w-px h-2 bg-gray-400 mx-auto" />
+                <div className="text-[10px] text-gray-600 font-medium mt-1">
                   {year}
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Timeline labels */}
-        <div className="flex justify-between mt-8 text-sm text-gray-700">
-          <div className="text-left">
-            <div className="font-semibold">Spanish Colonial</div>
-            <div className="text-xs">Missions & Presidios</div>
-          </div>
-          <div className="text-center">
-            <div className="font-semibold">Mexican Period</div>
-            <div className="text-xs">Ranchos & Pueblos</div>
-          </div>
-          <div className="text-right">
-            <div className="font-semibold">Gold Rush</div>
-            <div className="text-xs">Statehood & Boom</div>
-          </div>
         </div>
       </div>
     </div>

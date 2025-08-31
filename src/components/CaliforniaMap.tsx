@@ -5,7 +5,9 @@ import { getSourcesForSettlement, formatSourceCitation } from '../data/sources';
 import { createCustomIcon } from './MapIcons';
 import GridPopulationDensity from './GridPopulationDensity';
 import ExpeditionRoutesGeoJSON from './ExpeditionRoutesGeoJSON';
+import EarlyExpeditionRoutes from './EarlyExpeditionRoutes';
 import { LayerVisibility } from '../App';
+import { useHistoricalData } from '../hooks/useHistoricalData';
 
 interface CaliforniaMapProps {
   currentYear: number;
@@ -189,10 +191,15 @@ const CaliforniaMap: React.FC<CaliforniaMapProps> = ({ currentYear, layerVisibil
         currentYear={currentYear}
         visible={layerVisibility.populationDensity}
       />
+      <EarlyExpeditionRoutes
+        map={mapInstanceRef.current}
+        currentYear={currentYear}
+        visible={layerVisibility.expeditions && currentYear < 1769}
+      />
       <ExpeditionRoutesGeoJSON
         map={mapInstanceRef.current}
         currentYear={currentYear}
-        visible={layerVisibility.expeditions}
+        visible={layerVisibility.expeditions && currentYear >= 1769}
       />
     </>
   );
